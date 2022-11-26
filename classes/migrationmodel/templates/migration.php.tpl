@@ -1,19 +1,22 @@
 <?php namespace {namespace};
 
 use Schema;
+use Winter\Storm\Database\Schema\Blueprint;
 use Winter\Storm\Database\Updates\Migration;
 
 class {className} extends Migration
 {
     public function up()
     {
-        // Schema::create('{tableNamePrefix}_table', function($table)
-        // {
-        // });
+        Schema::table('{tableNamePrefix}_table', function (Blueprint $table) {
+
+        });
     }
 
     public function down()
     {
-        // Schema::drop('{tableNamePrefix}_table');
+        Schema::table('{tableNamePrefix}_table', function (Blueprint $table) {
+
+        });
     }
 }

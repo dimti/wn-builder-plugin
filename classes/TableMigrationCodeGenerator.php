@@ -318,8 +318,7 @@ class TableMigrationCodeGenerator extends BaseModel
     protected function generateSchemaTableMethodStart($tableName, $isNewTable)
     {
         $tableFunction = $isNewTable ? 'create' : 'table';
-        $result = sprintf('\tSchema::%s(\'%s\', function($table)', $tableFunction, $tableName).$this->eol;
-        $result .= '\t{'.$this->eol;
+        $result = sprintf('\tSchema::%s(\'%s\', function (Blueprint $table) {', $tableFunction, $tableName).$this->eol;
 
         if ($isNewTable) {
             $result .= '\t\t$table->engine = \'InnoDB\';'.$this->eol;
