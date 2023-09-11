@@ -179,7 +179,8 @@ class MigrationModel extends BaseModel
             }
 
             if ($cnt > 1) {
-                $this->scriptFileName = pathinfo(trim($versionInformation[1]), PATHINFO_FILENAME);
+                $scriptFileNamePathInfo = pathinfo(trim($versionInformation[1]));
+                $this->scriptFileName = $scriptFileNamePathInfo['dirname'] . DIRECTORY_SEPARATOR . $scriptFileNamePathInfo['filename'];
                 $this->code = $this->loadScriptFile();
             }
         }
