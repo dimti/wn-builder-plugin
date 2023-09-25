@@ -40,5 +40,10 @@
     },
     "extra": {
         "installer-name": "builder"
+    },
+    "config": {
+        "allow-plugins": {
+            "composer/installers": true
+        }
     }
 }
