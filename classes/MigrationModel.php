@@ -337,6 +337,8 @@ class MigrationModel extends BaseModel
     {
         $originalFileContents = $this->getOriginalFileContents();
 
+        $this->code .= "\n";
+
         if (strlen($this->scriptFileName)) {
             $scriptFilePath = $this->getPluginUpdatesPath($this->scriptFileName.'.php');
 

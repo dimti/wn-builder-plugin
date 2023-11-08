@@ -73,7 +73,8 @@ class Index extends Controller
                 $this->addJs($asset, 'Winter.Builder');
             }
         } else {
-            $this->addJs('/plugins/winter/builder/assets/js/build-min.js', 'Winter.Builder');
+            $this->addJs('/plugins/winter/builder/assets/js/runtime.js', 'Winter.Builder-runtime');
+            $this->addJs('/plugins/winter/builder/assets/js/build-min.js', 'Winter.Builder.v2');
         }
 
         $this->pageTitleTemplate = '%s Builder';

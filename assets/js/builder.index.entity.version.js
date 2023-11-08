@@ -62,9 +62,13 @@
             self = this
 
         this.showHintPopup($pane, 'builder-version-apply', function(){
-            $target.request('onVersionApply').done(
-                self.proxy(self.applyVersionDone)
-            )
+            $target.request('onVersionApply');
+
+            $(window).on('ajaxUpdateComplete', function(context, data, textStatus, jqXHR) {
+                if (data.handler == 'onVersionApply') {
+                    self.applyVersionDone(textStatus);
+                }
+            })
         })
     }
 
@@ -75,9 +79,13 @@
 
 
         this.showHintPopup($pane, 'builder-version-rollback', function(){
-            $target.request('onVersionRollback').done(
-                self.proxy(self.rollbackVersionDone)
-            )
+            $target.request('onVersionRollback');
+
+            $(window).on('ajaxUpdateComplete', function(context, data, textStatus, jqXHR) {
+                if (data.handler == 'onVersionRollback') {
+                    self.rollbackVersionDone(textStatus);
+                }
+            })
         })
     }
 

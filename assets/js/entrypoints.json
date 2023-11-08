@@ -1,0 +1,10 @@
+{
+  "entrypoints": {
+    "build-min": {
+      "js": [
+        "/plugins/winter/builder/assets/runtime.js",
+        "/plugins/winter/builder/assets/build-min.js"
+      ]
+    }
+  }
+}

@@ -13,3 +13,5 @@ nbproject
 
 # Other ignores
 .DS_Store
+
+/node_modules

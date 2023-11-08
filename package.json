@@ -1,0 +1,22 @@
+{
+  "name": "wn-builder",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "dev": "cross-env NODE_ENV=development webpack --mode=development --watch",
+    "build": "cross-env NODE_ENV=production webpack --mode=production"
+  },
+  "dependencies": {
+    "@symfony/webpack-encore": "^1.6.1",
+    "cross-env": "^5.1.5",
+    "css-loader": "^6.2.0",
+    "less": "^4.1.1",
+    "less-loader": "^10.0.1",
+    "path": "^0.12.7",
+    "querystring": "^0.2.1",
+    "sass": "^1.39.2",
+    "sass-loader": "^12.1.0",
+    "webpack-notifier": "^1.13.0"
+  }
+}
