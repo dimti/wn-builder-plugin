@@ -59,7 +59,7 @@ class ModelFileParser extends PhpFileParser
         $tableName = $finder->findFirst($class, function (Node $node) {
             return (
                 $node instanceof PropertyProperty
-                && $node->name instanceof VarLikeIdentifier
+                && ($node->name instanceof VarLikeIdentifier || $node->name instanceof Node\Const_)
                 && $node->name->name === 'table'
             );
         });
@@ -69,6 +69,7 @@ class ModelFileParser extends PhpFileParser
             || (
                 $tableName->default instanceof String_ === false
                 && $tableName->default instanceof Bool_ === false
+                && $tableName->default instanceof Node\Expr\ClassConstFetch === false
             )
         ) {
             return null;
@@ -76,6 +77,26 @@ class ModelFileParser extends PhpFileParser
 
         if ($tableName->default instanceof String_) {
             $result['table'] = $tableName->default->value;
+        } else if ($tableName->default instanceof Node\Expr\ClassConstFetch) {
+            $classConst = $tableName->default;
+
+            assert($classConst instanceof Node\Expr\ClassConstFetch);
+
+            $constClassNameParts = $classConst->class->getParts();
+
+            if (count($constClassNameParts) == 1) {
+                foreach ($namespace->stmts as $stmt) {
+                    if ($stmt instanceof Node\Stmt\Use_
+                        && $stmt->uses[0]->name->getLast() == $classConst->class->getFirst()
+                    ) {
+                        $constName = Name::concat($stmt->uses[0]->name->getParts(), null);
+                    }
+                }
+            } else {
+                $constName = Name::concat($constClassNameParts, null);
+            }
+
+            $result['table'] = constant($constName->toString() . '::' . $classConst->name);
         }
 
         return $result;
